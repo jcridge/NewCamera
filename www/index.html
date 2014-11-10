@@ -42,7 +42,7 @@
             app.initialize();
         </script>
         <script>
-        navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
+        navigator.camera.getPicture(cameraSuccess, cameraError, [cameraOptions]);
 
         function loadJS(){
             document.addEventListener("deviceready", onDeviceReady,false);
@@ -58,7 +58,7 @@
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src"' + imageURL + '" width="50%"/>';
+            ic.innerHTML = '<img src="' + imageURL + '" width="50%"/>';
         }
 
         function onCameraError(e){
