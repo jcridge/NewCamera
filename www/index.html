@@ -47,16 +47,16 @@
         
         function onDoConfirm(btnNum){
             if(btnNum == "1"){
-                function takePhoto(){
-                    navigator.camera.getPic+ture(onCameraSuccess,onCameraError);
-                }
+                takePhoto();
             }
             else{
                 alert("Gallery upload coming soon!");
             }
         }
             
-
+        function takePhoto(){
+            navigator.camera.getPicture(onCameraSuccess,onCameraError);
+        }
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
