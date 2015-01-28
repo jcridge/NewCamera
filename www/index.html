@@ -13,7 +13,7 @@
         <div class="app">
             <div id="imageContainer">This will be replaced</div>
             
-            <input type="button" value="Load Camera" onclick="takePhoto()">
+            <input type="button" value="Load Camera" onclick="chooseMedia()">
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -41,9 +41,20 @@
             navigator.notification.alert("onDeviceReady");
         }
 
+        function chooseMedia(){
+            navigator.notification.confirm("Would you like to take a photo or upload a pre-existing photo?", onDoConfirm, "Choose Media", "Camera, Gallery");
+        }
+        
+        function onDoConfirm(btnNum){
+            if(btnNum == "1"){
+                takePhoto();
+            }
+            else{
+                alert("Gallery upload coming soon!");
+            }
+            
         function takePhoto(){
-            navigator.notification.alert("Test", null, "Alert Title", "OK");
-            navigator.camera.getPicture(onCameraSuccess,onCameraError);
+            navigator.camera.getPic+ture(onCameraSuccess,onCameraError);
         }
 
         function onCameraSuccess(imageURL){
