@@ -11,7 +11,7 @@
     </head>
     <body onload="loadJS()">
         <div class="app">
-            <div id="imageContainer">x</div>
+            <div id="imageContainer">This will be replaced</div>
             
             <input type="button" value="Load Camera" onclick="takePhoto()">
         </div>
@@ -48,7 +48,7 @@
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src="' + imageURL + '"style="border-radius: 50%;"/>';
+            ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
         }
 
         function onCameraError(e){
