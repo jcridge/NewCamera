@@ -7,9 +7,6 @@
         <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
         <title>Camera Application</title>
         <style>
-        #imageContainer{
-            border-radius: 50%;
-        }
         </style>
     </head>
     <body onload="loadJS()">
@@ -53,7 +50,7 @@
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src="' + imageURL + '" width="50%"/>';
+            ic.innerHTML = '<img src="' + imageURL + '" width="50%" style="border-radius: 50%;"/>';
         }
 
         function onCameraError(e){
