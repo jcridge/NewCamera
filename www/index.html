@@ -22,7 +22,7 @@
         </script>
         <script>
         var cameraOptions = {
-            quality:75,
+            quality:50,
             sourceType : Camera.PictureSourceType.CAMERA,
             destinationType:Camera.DestinationType.FILE_URI,
             allowEdit: true,
@@ -50,7 +50,16 @@
                 takePhoto();
             }
             else{
-                alert("Gallery upload coming soon!");
+                //alert("Gallery upload coming soon!");
+                var cameraOptions = {
+                    quality:50,
+                    sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType:Camera.DestinationType.FILE_URI,
+                    allowEdit: true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth:300,
+                    targetHeight:300
+                };
             }
         }
             
