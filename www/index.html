@@ -45,6 +45,7 @@
         }
 
         function takePhoto(){
+            navigator.notification.alert("Test", null, "Alert Title", "OK");
             navigator.camera.getPicture(onCameraSuccess,onCameraError);
         }
 
