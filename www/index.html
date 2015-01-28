@@ -30,8 +30,8 @@
             destinationType:Camera.DestinationType.FILE_URI,
             allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth:1024,
-            targetHeight:768
+            targetWidth:300,
+            targetHeight:300
         };
             
         navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
@@ -51,7 +51,7 @@
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src="' + imageURL + '" width="50%" style="border-radius: 50%;"/>';
+            ic.innerHTML = '<img src="' + imageURL + '"style="border-radius: 50%;"/>';
         }
 
         function onCameraError(e){
