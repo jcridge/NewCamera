@@ -51,29 +51,25 @@
             }
             else{
                 //alert("Gallery upload coming soon!");
-                navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
-                
-                var cameraOptions = {
-                    quality:50,
-                    sourceType : Camera.PictureSourceType.SAVEDPHOTOALBUM,
-                    destinationType:Camera.DestinationType.FILE_URI,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth:300,
-                    targetHeight:300
-                };
-                
-                function takePhoto(){
-                    navigator.camera.getPicture(onCameraSuccess,onCameraError);
+                function getImage(){
+                    // Retrieve image file location from specified source
+                    navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ quality: 80, 
+                        destinationType: navigator.camera.DestinationType.DATA_URL,
+                        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                    });
                 }
 
-                function onCameraSuccess(imageURL){
-                    ic = document.getElementById('imageContainer');
-                    ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
+                function onCapturePhotoSuccess(imageURI) 
+                {   
+                    var ic = document.getElementById('imageContainer');
+                        //smallImage.src = "data:image/jpeg;base64," + imageURI;
+                        ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
                 }
 
-                function onCameraError(e){
-                    navigator.notification.alert("onCameraError: " + e);
+
+                function onCapturePhotoError(e) 
+                {
+                    navigator.notification.alert('Captured Failed because: ' + e); 
                 }
             }
         }
