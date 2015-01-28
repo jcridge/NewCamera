@@ -51,6 +51,8 @@
             }
             else{
                 //alert("Gallery upload coming soon!");
+                navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
+                
                 var cameraOptions = {
                     quality:50,
                     sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
