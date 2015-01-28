@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
 
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
         <title>Camera Application</title>
     </head>
     <body onload="loadJS()">
@@ -22,6 +22,16 @@
             app.initialize();
         </script>
         <script>
+        var cameraOptions = {
+            quality:75,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            destinationType:Camera.DestinationType.FILE_URI,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth:1024,
+            targetHeight:768
+        };
+            
         navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
 
         function loadJS(){
