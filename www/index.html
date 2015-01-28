@@ -60,6 +60,19 @@
                     targetWidth:300,
                     targetHeight:300
                 };
+                
+                function takePhoto(){
+                    navigator.camera.getPicture(onCameraSuccess,onCameraError);
+                }
+
+                function onCameraSuccess(imageURL){
+                    ic = document.getElementById('imageContainer');
+                    ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
+                }
+
+                function onCameraError(e){
+                    navigator.notification.alert("onCameraError: " + e);
+                }
             }
         }
             
