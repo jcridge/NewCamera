@@ -9,9 +9,11 @@
     </head>
     <body onload="loadJS()">
         <div class="app">
+            <div id="imageContainer"></div>
+            
             <header>Example Camera Application</header>
             <section>Use of Phonegap Camera</section>
-            <div id="imageContainer"></div>
+            
             <input type="button" value="Load Camera" onclick="takePhoto()">
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -36,7 +38,7 @@
 
         function onCameraSuccess(imageURL){
             ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src="' + imageURL + '" width="50%"/>';
+            ic.innerHTML = '<img src="' + imageURL + '" width="50%" style="border-radius="20%;" "/>';
         }
 
         function onCameraError(e){
