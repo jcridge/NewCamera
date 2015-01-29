@@ -14,8 +14,6 @@
             <div id="imageContainer">This will be replaced</div>
             
             <input type="button" value="Load Camera" onclick="chooseMedia()">
-            <input type="button" value="Load Camera" onclick="takePhoto()">
-            <input type="button" value="Load Camera" onclick="getImage()">
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -23,18 +21,6 @@
             app.initialize();
         </script>
         <script>
-        var cameraOptions = {
-            quality:50,
-            sourceType : Camera.PictureSourceType.CAMERA,
-            destinationType:Camera.DestinationType.FILE_URI,
-            allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth:300,
-            targetHeight:300
-        };
-            
-        navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
-
         function loadJS(){
             document.addEventListener("deviceready", onDeviceReady,false);
         }
@@ -58,39 +44,45 @@
         
         // Take photo using phone camera
             function takePhoto(){
-                navigator.camera.getPicture(onCameraSuccess,onCameraError);
+                navigator.camera.getPicture(cameraSuccess,cameraError,{ 
+                    quality: 50,
+                    destinationType: destinationType.DATA_URL,
+                    allowEdit : true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 300,
+                    targetHeight: 300
+                });
             }
 
-            function onCameraSuccess(imageURL){
+            function cameraSuccess(imageAddress){
                 phoneImage = document.getElementById('imageContainer');
-                phoneImage.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
+                phoneImage.innerHTML = '<img src="' + imageAddress + '" width="30%" style="border-radius: 50%;"/>';
             }
 
-            function onCameraError(e){
-                navigator.notification.alert("onCameraError: " + e);
+            function cameraError(errorMessage){
+                navigator.notification.alert("Failed to load camera because of " + errorMessage);
             }
          
         // Get Prior Saved Image from Phone
             function getImage(){
-                navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ 
+                navigator.camera.getPicture(loadSuccess, loadError,{ 
                     quality: 50, 
                     destinationType: navigator.camera.DestinationType.DATA_URL,
-                    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                    sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
                     targetWidth:300,
                     targetHeight:300                                                                    
                 });
             }
 
-            function onCapturePhotoSuccess(imageURI) 
+            function loadSuccess(imageAddress) 
             {   
                 phoneImage = document.getElementById('imageContainer');
-                //phoneImage.src = "data:image/jpeg;base64," + imageURI;
-                phoneImage.innerHTML = '<img src="' + imageURI + '" width="30%" />';
+                phoneImage.innerHTML = '<img src="' + imageAddress + '" width="30%" />';
             }
 
-            function onCapturePhotoError(e) 
+            function loadError(errorMessage) 
             {
-                navigator.notification.alert("Failed to load image because of " + e);
+                navigator.notification.alert("Failed to load image because of " + errorMessage);
             }
     </script>
     </body>
