@@ -90,17 +90,19 @@
         function getImage()
         {
             // Retrieve image file location from specified source
-            navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ quality: 80, 
+            navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ quality: 50, 
                 destinationType: navigator.camera.DestinationType.DATA_URL,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                targetWidth:300,
+                targetHeight:300                                                                    
             });
         }
 
         function onCapturePhotoSuccess(imageURI) 
         {   
             var smallImage = document.getElementById('imageContainer');
-                smallImage.src = "data:image/jpeg;base64," + imageURI;
-                smallImage.innerHTML = '<img src="' + imageURI + '" width="30%" style="border-radius: 50%;"/>';
+                //smallImage.src = "data:image/jpeg;base64," + imageURI;
+                smallImage.innerHTML = '<img src="' + imageURI + '" width="30%" />';
         }
 
         function onCapturePhotoError(message) 
