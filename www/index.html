@@ -13,6 +13,8 @@
         <div class="app">
             <div id="imageContainer">This will be replaced</div>
             
+            <input type="button" value="Load Camera" onclick="chooseMedia()">
+            <input type="button" value="Load Camera" onclick="takePhoto()">
             <input type="button" value="Load Camera" onclick="getImage()">
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -45,70 +47,51 @@
             navigator.notification.confirm("Would you like to take a photo or upload a pre-existing photo?", onDoConfirm, "Choose Media", "Camera, Gallery");
         }
         
-        /*function onDoConfirm(btnNum){
+        function onDoConfirm(btnNum){
             if(btnNum == "1"){
                 takePhoto();
             }
-            else{
-                //alert("Gallery upload coming soon!");
-                function getImage(){
-                    // Retrieve image file location from specified source
-                    navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ quality: 80, 
-                        destinationType: navigator.camera.DestinationType.DATA_URL,
-                        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-                    });
-                }
-
-                function onCapturePhotoSuccess(imageURI) 
-                {   
-                    var ic = document.getElementById('imageContainer');
-                        //smallImage.src = "data:image/jpeg;base64," + imageURI;
-                        ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
-                }
-
-
-                function onCapturePhotoError(e) 
-                {
-                    navigator.notification.alert('Captured Failed because: ' + e); 
-                }
+            if(btnNum == "2"){
+                getImage();   
             }
         }
-            
-        function takePhoto(){
-            navigator.camera.getPicture(onCameraSuccess,onCameraError);
-        }
+        
+        // Take photo using phone camera
+            function takePhoto(){
+                navigator.camera.getPicture(onCameraSuccess,onCameraError);
+            }
 
-        function onCameraSuccess(imageURL){
-            ic = document.getElementById('imageContainer');
-            ic.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
-        }
+            function onCameraSuccess(imageURL){
+                phoneImage = document.getElementById('imageContainer');
+                phoneImage.innerHTML = '<img src="' + imageURL + '" width="30%" style="border-radius: 50%;"/>';
+            }
 
-        function onCameraError(e){
-            navigator.notification.alert("onCameraError: " + e);
-        }*/
-            
-        function getImage()
-        {
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ quality: 50, 
-                destinationType: navigator.camera.DestinationType.DATA_URL,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-                targetWidth:300,
-                targetHeight:300                                                                    
-            });
-        }
+            function onCameraError(e){
+                navigator.notification.alert("onCameraError: " + e);
+            }
+         
+        // Get Prior Saved Image from Phone
+            function getImage(){
+                navigator.camera.getPicture(onCapturePhotoSuccess, onCapturePhotoError,{ 
+                    quality: 50, 
+                    destinationType: navigator.camera.DestinationType.DATA_URL,
+                    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                    targetWidth:300,
+                    targetHeight:300                                                                    
+                });
+            }
 
-        function onCapturePhotoSuccess(imageURI) 
-        {   
-            var smallImage = document.getElementById('imageContainer');
-                //smallImage.src = "data:image/jpeg;base64," + imageURI;
-                smallImage.innerHTML = '<img src="' + imageURI + '" width="30%" />';
-        }
+            function onCapturePhotoSuccess(imageURI) 
+            {   
+                phoneImage = document.getElementById('imageContainer');
+                //phoneImage.src = "data:image/jpeg;base64," + imageURI;
+                phoneImage.innerHTML = '<img src="' + imageURI + '" width="30%" />';
+            }
 
-        function onCapturePhotoError(message) 
-        {
-            console.log('Captured Failed because: ' + message); 
-        }
+            function onCapturePhotoError(e) 
+            {
+                navigator.notification.alert("Failed to load image because of " + e);
+            }
     </script>
     </body>
 </html>
